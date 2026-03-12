@@ -1,0 +1,25 @@
+{
+    "name": "task-tracker-cli",
+    "version": "1.0.0",
+    "description": "A professional command-line task tracker built with Node.js",
+    "type": "module",
+    "private": true,
+    "bin": {
+        "task-cli": "./bin/task-cli.js"
+    },
+    "scripts": {
+        "start": "node ./bin/task-cli.js",
+        "dev": "node ./bin/task-cli.js",
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+        "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+        "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+    },
+    "engines": {
+        "node": ">=18"
+    },
+    "devDependencies": {
+        "jest": "^30.3.0"
+    },
+    "author": "Muhamed Shillua",
+    "license": "ISC"
+}
