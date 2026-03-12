@@ -1,0 +1,107 @@
+# ===============================
+# Node.js
+# ===============================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ===============================
+# Environment Variables
+# ===============================
+.env
+.env.local
+.env.*.local
+.env.test
+.env.production
+.env.staging
+
+# ===============================
+# Logs
+# ===============================
+logs/
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# ===============================
+# Runtime Data / Process IDs
+# ===============================
+pids/
+*.pid
+*.seed
+*.pid.lock
+*.lock
+
+# ===============================
+# Coverage / Testing
+# ===============================
+coverage/
+*.lcov
+.nyc_output/
+.jest/
+jest-cache/
+.vitest/
+
+# ===============================
+# Build / Compiled files
+# ===============================
+dist/
+build/
+tmp/
+temp/
+*.tsbuildinfo
+lib-cov/
+*.tgz
+
+# ===============================
+# Docker / Containers
+# ===============================
+docker-compose.override.yml
+docker-compose.override.*.yml
+docker-data/
+mongo-data/
+postgres-data/
+redis-data/
+*.dockerfile
+*.compose
+*.env.docker
+
+# ===============================
+# Databases
+# ===============================
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+*.dump
+
+# ===============================
+# Editors / IDEs
+# ===============================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# ===============================
+# OS / System files
+# ===============================
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+
+# ===============================
+# Miscellaneous
+# ===============================
+*.bak
+*.tmp
+*.old
+*.orig
