@@ -159,3 +159,9 @@ npm test
 
 - Unit tests cover each service function
 - Integration tests ensure CLI commands perform correctly
+
+---
+
+## 9. Project Reference
+
+- Roadmap / Learning Resource: [https://roadmap.sh/projects/task-tracker](https://roadmap.sh/projects/task-tracker)
