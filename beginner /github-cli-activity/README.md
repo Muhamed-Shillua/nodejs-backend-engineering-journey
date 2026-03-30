@@ -1,61 +1,67 @@
-# GitHub CLI Activity
+# GitHub Activity CLI
 
 **Tier:** Beginner
-
 **Type:** CLI
-
 **Status:** In-Progress
 
 ---
 
 ## 1. Executive Overview
 
-**GitHub CLI Activity** is a lightweight command-line tool that fetches and displays a GitHub user's recent public activity directly in the terminal.
+**GitHub Activity CLI** is a Node.js command-line tool that fetches a GitHub user's recent public activity and converts it into a human-readable format.
 
-The tool uses the **GitHub public API** to retrieve user events and formats them into a readable terminal output, allowing developers to quickly inspect recent activity without opening a browser.
+The tool uses the **GitHub public API** to retrieve user events and provides:
+
+* Listing of recent events
+* Filtering by event type
+* Streak summaries with counts of commits, issues, pull requests, stars, and branches/repos created
 
 This project demonstrates core **Node.js backend engineering concepts**, including:
 
-- Modular project architecture
-- CLI argument parsing
-- API communication using Node.js built-in modules
-- Data formatting for terminal output
-- Structured error handling
-- Separation of concerns
+* Modular project architecture
+* CLI argument parsing
+* API communication using Node.js built-in modules
+* Data formatting and aggregation
+* Structured error handling
+* Separation of concerns
 
-The goal of this project is to provide a **clean and scalable foundation for building API-driven CLI tools** in Node.js.
+The goal is to provide a **clean, scalable foundation for building CLI tools that interact with APIs**.
 
 ---
 
 ## 2. Project Structure
 
-A modular project structure helps maintain readability and allows easy extension of features.
-
 ```
-github-cli-activity/
+github-activity-cli/
 │
 ├── bin/
-│   └── github-cli             # CLI entry point (executable script)
+│   └── github-cli.js           # CLI entry point (executable script)
 │
 ├── src/
-│   ├── api/                   # API communication layer
-│   │   └── githubClient.js
+│   ├── cli/
+│   │   ├── parser.js           # CLI argument parser
+│   │   └── cliHandler.js       # Handles commands and input validation
 │   │
-│   ├── cli/                   # CLI parsing and command handling
-│   │   └── cliHandler.js
+│   ├── commands/
+│   │   ├── ls.js               # Lists recent events
+│   │   ├── filter.js           # Filters events by type
+│   │   └── streak.js           # Generates streak summary messages
 │   │
-│   ├── services/              # Business logic layer
-│   │   └── activityService.js
+│   ├── services/
+│   │   └── activityService.js  # Core logic for fetching and processing GitHub events
 │   │
-│   ├── utils/                 # Utility modules
-│   │   ├── formatter.js
-│   │   ├── errorHandler.js
-│   │   └── logger.js
+│   ├── utils/
+│   │   ├── formatter.js        # Formats output for terminal
+│   │   ├── logger.js           # Console logging utility
+│   │   └── errorHandler.js     # Centralized error handling
 │   │
-│   └── config/                # Project configuration
-│       └── constants.js
+│   └── config/
+│       └── constants.js        # Project constants (API URLs, etc.)
 │
-├── tests/                     # Unit tests
+├── tests/
+│   ├── commands/
+│   ├── services/
+│   └── utils/
 │
 ├── package.json
 ├── .gitignore
@@ -66,21 +72,22 @@ github-cli-activity/
 
 ## 3. Features
 
-- **Fetch recent GitHub user activity**
-- **Display activity in a clean terminal format**
-- **Accept GitHub username as a CLI argument**
-- **Graceful error handling for invalid users or API failures**
-- **Modular architecture designed for scalability**
+* **Fetch recent GitHub user activity**
+* **Filter events by type** (`PushEvent`, `IssuesEvent`, `PullRequestEvent`, `WatchEvent`, `CreateEvent`)
+* **Generate streak summaries** with commit counts, issues, PRs, stars, and creations
+* **CLI argument parsing and validation**
+* **Graceful error handling**
+* **Modular architecture for scalability**
 
 ---
 
 ## 4. Tech Stack
 
-- **Runtime:** Node.js
-- **API:** GitHub REST API
-- **Networking:** Native Node.js `https` module (no external dependencies)
-- **CLI Execution:** Node.js command-line environment
-- **Testing:** Jest (optional for future development)
+* **Runtime:** Node.js
+* **API:** GitHub REST API
+* **Networking:** Native Node.js `https` module
+* **CLI Execution:** Node.js command-line environment
+* **Testing:** Jest (optional)
 
 ---
 
@@ -88,91 +95,103 @@ github-cli-activity/
 
 ```bash
 # Clone the repository
-git clone https://github.com/Muhamed-Shillua/github-cli-activity.git
+git clone https://github.com/Muhamed-Shillua/github-activity-cli.git
 
-# Navigate to the project directory
-cd github-cli-activity
+# Navigate to project
+cd github-activity-cli
 
-# Install dependencies (optional if tests or scripts are added later)
+# Install dependencies (optional if adding tests or scripts)
 npm install
 
-# Make CLI executable (Linux/macOS)
-chmod +x bin/github-cli
+# Make CLI executable
+chmod +x bin/github-cli.js
 
 # Run the CLI
-./bin/github-cli <github-username>
+./bin/github-cli.js <command> <github-username>
 ```
 
 ---
 
 ## 6. Usage Examples
 
-**Basic CLI Usage:**
+**List recent events:**
 
 ```bash
-# Fetch recent activity for a user
-./bin/github-cli octocat
+./bin/github-cli.js ls Muhamed-Shillua
 ```
 
 Example Output:
 
 ```
-PushEvent at octocat/Hello-World on 3/24/2026, 8:12:45 PM
-CreateEvent at octocat/test-repo on 3/23/2026, 5:02:10 PM
-IssueCommentEvent at octocat/docs on 3/22/2026, 9:45:31 AM
+PushEvent at Muhamed-Shillua/nodejs-backend-engineering-journey on 3/30/2026, 2:23 PM
+CreateEvent at Muhamed-Shillua/portfolio on 3/25/2026, 4:45 PM
 ```
 
-If the username does not exist:
+**Filter events by type:**
+
+```bash
+./bin/github-cli.js filter PushEvent Muhamed-Shillua
+```
+
+Example Output:
 
 ```
-Error: User not found
+PushEvent at Muhamed-Shillua/nodejs-backend-engineering-journey on 3/30/2026, 2:23 PM
+PushEvent at Muhamed-Shillua/portfolio on 3/25/2026, 5:32 PM
 ```
 
-If the user has no public activity:
+**Generate streak summary:**
+
+```bash
+./bin/github-cli.js streak Muhamed-Shillua
+```
+
+Example Output:
 
 ```
-No recent activity found.
+- Pushed 14 commits to Muhamed-Shillua/nodejs-backend-engineering-journey
+- Pushed 4 commits to Muhamed-Shillua/portfolio
+- Created 1 new branch(es) or repo(s) in Muhamed-Shillua/portfolio
+- Pushed 11 commits to Muhamed-Shillua/nodejs-backend-bootcamp
 ```
 
 ---
 
 ## 7. Architecture Overview
 
-The project follows a **layered architecture** to ensure separation of concerns.
+The project uses a **layered architecture**:
 
-**bin/github-cli**
+**bin/github-cli.js**
 
-- CLI entry point
-- Reads command-line arguments
-- Passes arguments to the CLI handler
+* CLI entry point
+* Reads command-line arguments
+* Passes control to CLI handler
 
 **src/cli/cliHandler.js**
 
-- Handles CLI input parsing
-- Validates arguments
-- Calls service layer functions
+* Parses and validates CLI input
+* Calls relevant command modules
+
+**src/commands/**
+
+* `ls.js` → lists recent events
+* `filter.js` → filters events by type
+* `streak.js` → computes streak summaries using the `streak` function
 
 **src/services/activityService.js**
 
-- Core business logic
-- Coordinates API requests and data processing
+* Fetches GitHub events
+* Processes and aggregates data for commands
 
-**src/api/githubClient.js**
+**src/utils/**
 
-- Responsible for communicating with the GitHub API
-- Handles HTTP requests and response parsing
-
-**src/utils/formatter.js**
-
-- Formats API response data for terminal display
-
-**src/utils/errorHandler.js**
-
-- Centralized error handling for consistent CLI error messages
+* `formatter.js` → formats data for terminal display
+* `logger.js` → console output utility
+* `errorHandler.js` → centralized error handling
 
 **src/config/constants.js**
 
-- Stores project-wide constants such as API URLs
+* Stores reusable constants (e.g., GitHub API URL)
 
 ---
 
@@ -184,38 +203,20 @@ Run tests using:
 npm test
 ```
 
-Testing strategy includes:
+Testing strategy:
 
-- **Unit tests** for API client and service logic
-- **Formatter tests** to ensure correct terminal output
-- **CLI tests** to validate argument parsing and command execution
-
----
-
-## 9. Possible Future Enhancements
-
-This project is intentionally designed to support future expansion.
-
-Potential improvements include:
-
-- **Activity filtering** by event type (Push, Issue, PR, etc.)
-- **Pagination support** for viewing more events
-- **Colorized terminal output**
-- **JSON output mode for scripting**
-- **Local caching to reduce API calls**
-- **Authentication using GitHub tokens**
-- **Support for additional GitHub endpoints**
+* Unit tests for command modules
+* Service logic tests for data processing
+* Formatter tests for correct terminal output
 
 ---
 
-## 10. Learning Outcomes
+## 9. Learning Outcomes
 
-By building this project, developers gain hands-on experience with:
+Developers gain experience with:
 
-- Designing scalable CLI applications
-- Consuming external APIs in Node.js
-- Structuring backend projects professionally
-- Writing modular and maintainable code
-- Implementing proper error handling
-
-This project serves as a **practical introduction to building API-driven CLI tools with Node.js**.
+* Building CLI applications in Node.js
+* Consuming external APIs
+* Structuring modular backend projects
+* Implementing structured error handling
+* Aggregating and formatting data for readable output
