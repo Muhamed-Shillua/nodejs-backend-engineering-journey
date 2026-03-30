@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 
 /**
- * Entry point for GitHub CLI Activity
- * This script parses CLI arguments and delegates to the handler
+ * CLI entry point
+ * Bootstraps the application and forwards arguments to the parser.
  */
 
-import { handleCLI } from "../src/cli/cliHandler.js";
+import { parseCommand } from "../src/cli/parser.js";
+import { handleError } from "../src/utils/errorHandler.js";
 
-// Pass all arguments except "node" and script path
-handleCLI(process.argv.slice(2));
+try {
+    parseCommand(process.argv);
+} catch (err) {
+    handleError(`Unexpected error: ${err.message}`);
+}
