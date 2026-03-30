@@ -1,0 +1,30 @@
+{
+"name": "github-cli-activity",
+"version": "1.0.0",
+"description": "A professional command-line tool that fetches and displays a GitHub user's recent activity in the terminal",
+"type": "module",
+"private": true,
+
+"bin": {
+    "github-activity": "./bin/github-cli"
+},
+
+"scripts": {
+    "start": "node ./bin/github-cli",
+    "dev": "node ./bin/github-cli",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+},
+
+"engines": {
+    "node": ">=18"
+},
+
+"devDependencies": {
+    "jest": "^30.3.0"
+},
+
+"author": "Muhamed Shillua",
+"license": "ISC"
+}
