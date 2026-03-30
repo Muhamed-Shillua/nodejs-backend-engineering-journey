@@ -1,8 +1,10 @@
 # GitHub CLI Activity
 
 **Tier:** Beginner
+
 **Type:** CLI
-**Status:** Completed
+
+**Status:** In-Progress
 
 ---
 
