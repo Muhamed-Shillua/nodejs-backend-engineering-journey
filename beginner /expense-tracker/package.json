@@ -1,0 +1,41 @@
+{
+  "name": "expense-tracker",
+  "version": "1.0.0",
+  "description": "Professional CLI tool to manage and track daily expenses",
+  "main": "src/cli/index.js",
+  "type": "module",
+  "private": true,
+  "author": "Muahmed Shillua",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "bin": {
+    "expense-tracker": "./src/cli/index.js"
+  },
+  "scripts": {
+    "start": "node src/cli/index.js",
+    "dev": "node --watch src/cli/index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "lint": "eslint src/**/*.js"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "transform": {},
+    "testEnvironment": "node",
+    "verbose": true,
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/cli/index.js"
+    ]
+  }
+}
