@@ -12,13 +12,13 @@ export class Expense {
    * @param {number} data.amount - Monetary value
    * @param {string} [data.category] - Optional classification (e.g., Food, Tech)
    */
-  constructor({ id, description, amount, category = "General" }) {
+  constructor({ id, description, amount, category = "General", createdAt, updatedAt}) {
     this.id = this.validateId(id);
     this.description = this.validateDescription(description);
     this.amount = this.validateAmount(amount);
     this.category = category.toLowerCase().trim();
-    this.createdAt = new Date().toISOString();
-    this.updatedAt = "no updates yet";
+    this.createdAt = createdAt ?? new Date().toISOString(),
+    this.updatedAt = updatedAt ?? "No updates yet"
   }
 
   /**
