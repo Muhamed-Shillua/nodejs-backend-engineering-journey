@@ -99,6 +99,18 @@ program
 
 /**
  * =========================
+ * REPORT COMMAND
+ * =========================
+ */
+program
+  .command("report")
+  .alias("r")
+  .description("View total expenditure insights")
+  .option("--month <m>", "Filter by month (1-12)", parseInt)
+  .action(reportCommandHandler);
+
+/**
+ * =========================
  * HELP EXAMPLES
  * =========================
  */
