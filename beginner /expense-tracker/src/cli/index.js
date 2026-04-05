@@ -73,6 +73,21 @@ program
 
 /**
  * =========================
+ * UPDATE COMMAND
+ * =========================
+ */
+program
+  .command("update")
+  .alias("u")
+  .description("Modify an existing expense record")
+  .requiredOption("--id <id>", "Unique ID of the record to update", parseInt)
+  .option("--description <desc>", "New description")
+  .option("--amount <amt>", "New numeric amount", parseFloat)
+  .option("--category <cat>", "New category")
+  .action((options) => updateCommandHandler(options.id, options));
+
+/**
+ * =========================
  * HELP EXAMPLES
  * =========================
  */
