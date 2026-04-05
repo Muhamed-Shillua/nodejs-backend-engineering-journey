@@ -12,21 +12,21 @@ export class Expense {
    * @param {number} data.amount - Monetary value
    * @param {string} [data.category] - Optional classification (e.g., Food, Tech)
    */
-  constructor({id, description, amount, category = "General"}) {
+  constructor({ id, description, amount, category = "General" }) {
     this.id = this.validateId(id);
     this.description = this.validateDescription(description);
     this.amount = this.validateAmount(amount);
     this.category = category.toLowerCase().trim();
     this.createdAt = new Date().toISOString();
-    this.updatedAt = this.createdAt || new Date().toISOString();
+    this.updatedAt = "no updates yet";
   }
 
   /**
    * Ensures the ID is a positive integer
    */
-  validateId(id){
-    if (typeof id !== 'number' || id <= 0){
-      throw new Error('Domain Error: ID must be a positive number.');
+  validateId(id) {
+    if (typeof id !== "number" || id <= 0) {
+      throw new Error("Domain Error: ID must be a positive number.");
     }
     return id;
   }
@@ -37,7 +37,9 @@ export class Expense {
   validateDescription(desc) {
     const cleanDesc = desc?.trim();
     if (!cleanDesc || cleanDesc.length < 3) {
-      throw new Error('Domain Error: Description must be at least 3 characters long.');
+      throw new Error(
+        "Domain Error: Description must be at least 3 characters long.",
+      );
     }
     return cleanDesc;
   }
@@ -48,7 +50,7 @@ export class Expense {
   validateAmount(amt) {
     const parsedAmt = Number(amt);
     if (isNaN(parsedAmt) || parsedAmt <= 0) {
-      throw new Error('Domain Error: Amount must be a positive numeric value.');
+      throw new Error("Domain Error: Amount must be a positive numeric value.");
     }
     return parsedAmt;
   }
