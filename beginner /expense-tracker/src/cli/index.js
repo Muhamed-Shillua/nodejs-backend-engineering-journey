@@ -55,15 +55,21 @@ program
   .alias("a")
   .description("Register a new expense in the ledger")
   .requiredOption("--description <desc>", "Description of the expense")
-  .requiredOption("--amount <amt>", "Numeric amount spent", (value) => {
-    const parsed = parseFloat(value);
-    if (isNaN(parsed) || parsed <= 0) {
-      throw new Error("Amount must be a positive number.");
-    }
-    return parsed;
-  })
-  .option("--category <cat>", "Optional category tag", "General")
+  .requiredOption("--amount <amt>", "Numeric amount spent")
+  .option("--category <cat>", "Optional category tag")
   .action(addCommandHandler);
+
+/**
+ * =========================
+ * DELETE COMMAND
+ * =========================
+ */
+program
+  .command("delete")
+  .alias("d")
+  .description("Permanently remove an expense record")
+  .requiredOption("--id <id>", "Unique ID of the record", parseInt)
+  .action(deleteCommandHandler);
 
 /**
  * =========================
