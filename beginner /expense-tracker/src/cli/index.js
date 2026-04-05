@@ -88,6 +88,17 @@ program
 
 /**
  * =========================
+ * LIST COMMAND
+ * =========================
+ */
+program
+  .command("list")
+  .alias("ls")
+  .description("Display the complete expense history")
+  .action(listCommandHandler);
+
+/**
+ * =========================
  * HELP EXAMPLES
  * =========================
  */
