@@ -1,0 +1,96 @@
+# =========================
+# Node.js Dependencies
+# =========================
+node_modules/
+
+# =========================
+# Logs
+# =========================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Runtime Data
+# =========================
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# =========================
+# Coverage / Testing
+# =========================
+coverage/
+.nyc_output/
+
+# =========================
+# Environment Variables
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Build / Output
+# =========================
+dist/
+build/
+out/
+
+# =========================
+# Temporary Files
+# =========================
+tmp/
+temp/
+*.tmp
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Editor / IDE
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+
+# =========================
+# CLI Global Link (npm link)
+# =========================
+lib-cov/
+
+# =========================
+# Cache
+# =========================
+.cache/
+.parcel-cache/
+
+# =========================
+# Optional: Logs for CLI runs
+# =========================
+*.history
+
+# =========================
+# Optional: Data Storage (if you add scores later)
+# =========================
+data/*.json
+!data/.keep
+
+# =========================
+# TypeScript (if added later)
+# =========================
+*.tsbuildinfo
+
+# =========================
+# ESLint Cache
+# =========================
+.eslintcache
