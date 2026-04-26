@@ -1,0 +1,17 @@
+{
+  "name": "convert-it",
+  "version": "1.0.0",
+  "description": "Vanilla Node.js MVC Unit Converter API",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "dotenv": "17.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}
