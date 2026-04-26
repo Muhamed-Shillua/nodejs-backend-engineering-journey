@@ -15,27 +15,32 @@ import { unitsConfig } from "../config/units.config.js";
  * @returns {string|null} Error message or null if valid.
  */
 export const validateConversionInput = (data) => {
+  if(!data || typeof data !== "object"){
+    return { valid: false, error: "Invalid input: expected an object" };
+  }
+
   const { type, value, from, to } = data;
 
   if (!type || value === undefined || !from || !to) {
-    return "Missing required fields: type, value, from, to";
+    return { valid: false, error: "Missing required fields: type, value, from, to" };
   }
 
-  if (!unitsConfig[type]) {
-    return `Invalid type: ${type}`;
+  if (!unitsConfig[type.trim().toLowerCase()]) {
+    return { valid: false, error: `Invalid type: ${type}` };
   }
 
-  if (typeof value !== "number" || isNaN(value)) {
-    return "Value must be a valid number";
+  const numericValue = Number(value);
+  if (typeof numericValue !== "number" || isNaN(numericValue)) {
+    return { valid: false, error: "Value must be a valid number" };
   }
 
-  if (!unitsConfig[type].units[from]) {
-    return `Invalid 'from' unit: ${from}`;
+  if (!unitsConfig[type].units[from.trim().toLowerCase()]) {
+    return { valid: false, error: `Invalid 'from' unit: ${from}` };
   }
 
-  if (!unitsConfig[type].units[to]) {
-    return `Invalid 'to' unit: ${to}`;
+  if (!unitsConfig[type].units[to.trim().toLowerCase()]) {
+    return { valid: false, error: `Invalid 'to' unit: ${to}` };
   }
 
-  return null;
+  return { valid: true, payload: { type, value: numericValue, from, to } };
 };
